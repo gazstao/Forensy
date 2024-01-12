@@ -2,6 +2,7 @@
 import json
 import os
 
+# Aprimorar: https://gist.github.com/leommoore/f9e57ba2aa4bf197ebc5?permalink_comment_id=4111195
 # Nome do arquivo para salvar os dados
 nome_arquivo = 'db_file_signatures.json'
 
@@ -20,7 +21,9 @@ file_signatures = {
     b'\x00\x01\x00\x00\x00': 'TTF',
     b'GIF89': 'GIF',
     b'\xff\xd8\xff\xe0\x00': 'JPEG',
-    b"7z\xbc\xaf'":'7zip'
+    b"7z\xbc\xaf'":'7zip',
+    b'\xa7\r\r\n\x00':'PyCharm',
+    b'\x00\x00\x00\x00\x00':'ISO'
 # Adicione outras assinaturas conforme necessário
 }
 

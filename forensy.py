@@ -7,7 +7,7 @@ import json
 
 # Read file magic number database
 from db_load_file_signatures import load_database
-file_signatures = load_database('db_file_signatures.json')
+file_signatures = load_database()
 
 # Test if is a dir.
 # If it is, call it recursively
@@ -16,7 +16,8 @@ def test_dir(_path):
     for child in pathlib.Path(_path).glob("*"):
         try:
             if child.is_file():
-                print(test_file(child))
+                if test_file(child) != None:
+                    print(test_file(child))
             elif child.is_dir():
                 test_dir(child)
         except Exception as e:
@@ -40,8 +41,8 @@ def test_file(file_path):
             if file_header.startswith(signature.encode('latin-1')):
                 return file_type
 
-        #string = 'Unknown type: '+str(file_header)
-        #return string
+        string = 'Unknown type: '+str(file_header)
+        return string
 
     except Exception as e:
         print(f"Erro {e}")
@@ -56,4 +57,4 @@ def test_file(file_path):
 
 
 # IMPLEMENTAR COMPARAÇÃO DA EXTENSÃO VERIFICADA COM A FORNECIDA
-test_dir("..")
+test_dir("c:\\")

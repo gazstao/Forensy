@@ -16,11 +16,10 @@ def load_database(file='db_file_signatures.json'):
         with open(file, 'r') as arquivo:
             file_signatures = json.load(arquivo, object_hook=bytes_decoder)
 
-        print('DB OK!\nREADED: ', file_signatures)
+        itens = len(file_signatures)
+        print(f'DB OK!\nREADED. {itens} signatures detected.')
         return file_signatures
 
     except:
         print("No database found.")
         return None
-
-load_database()
