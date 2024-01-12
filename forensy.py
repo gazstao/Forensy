@@ -3,49 +3,46 @@
 # Gazstao 12 JAN 24
 
 import pathlib
+import json
 
+# Read file magic number database
+from db_load_file_signatures import load_database
+file_signatures = load_database('db_file_signatures.json')
 
-# Lendo o dicionário de um arquivo JSON com a função de decodificação personalizada
-with open(nome_arquivo, 'r') as arquivo:
-    file_signatures_lido = json.load(arquivo, object_hook=bytes_decoder)
-
-print('Dicionário lido do arquivo:', file_signatures_lido)
-
-file_signatures = file_signatures_lido
-# IMPLEMENTAR COMPARAÇÃO DA EXTENSÃO VERIFICADA COM A FORNECIDA
-
-
-def testa_dir(_path):
-
+# Test if is a dir.
+# If it is, call it recursively
+# If it is a file, call the function to test it
+def test_dir(_path):
     for child in pathlib.Path(_path).glob("*"):
         try:
             if child.is_file():
-                print(testa_arquivo(child))
+                print(test_file(child))
             elif child.is_dir():
-                testa_dir(child)
+                test_dir(child)
         except Exception as e:
             print(f'Erro {e} no arquivo {child}')
 
 
-def testa_arquivo(file_path):
-
-#    if (keyboard.is_pressed("enter") | keyboard.is_pressed(" ")):
-#        exit(0)
-
+# Test magic number of file
+def test_file(file_path):
     try:
-        print(f"[*] testa_arquivo {file_path}: ", end="")
-        # Defina as assinaturas de arquivo para os tipos que você deseja identificar
+        print(f"[*] Testing {file_path}: ", end="")
 
         # Leitura dos primeiros bytes do arquivo
         with open(file_path, 'rb') as file:
             file_header = file.read(5)  # Leitura dos primeiros 5 bytes
 
+        # Converta file_header para bytes
+        file_header = bytes(file_header)
+
         # Verifique se as assinaturas correspondem
         for signature, file_type in file_signatures.items():
-            if file_header.startswith(signature):
+            if file_header.startswith(signature.encode('latin-1')):
                 return file_type
-        string = 'Desconhecido: '+str(file_header)
-        return string
+
+        #string = 'Unknown type: '+str(file_header)
+        #return string
+
     except Exception as e:
         print(f"Erro {e}")
 
@@ -57,3 +54,6 @@ def testa_arquivo(file_path):
 # - testar hashes suspeitos em algum serviço online
 #
 
+
+# IMPLEMENTAR COMPARAÇÃO DA EXTENSÃO VERIFICADA COM A FORNECIDA
+test_dir("..")
