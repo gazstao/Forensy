@@ -57,4 +57,4 @@ def test_file(file_path):
 
 
 # IMPLEMENTAR COMPARAÇÃO DA EXTENSÃO VERIFICADA COM A FORNECIDA
-test_dir("c:\\")
+test_dir(".")

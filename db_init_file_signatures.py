@@ -7,23 +7,23 @@ import os
 nome_arquivo = 'db_file_signatures.json'
 
 file_signatures = {
-    b'GIF89a': 'GIF',  # Exemplo de assinatura para arquivos GIF
+    b"7z\xbc\xaf'":'7zip',
+    b'BM6\xd8\xbd': 'Bitmap',
+    b'MZ\x90\x00\x03': 'EXE/DLL',
+    b'GIF89': 'GIF',
+    b'<!DOC': 'HTML',
+    b'IRPF ': 'IRPF',
+    b'\x00\x00\x00\x00\x00': 'ISO',
+    b'\xff\xd8\xff\xe0\x00': 'JPEG',
+    b'{\n': 'JSON',
+    b'\xFF\xFB': 'MP3',
     b'%PDF': 'PDF',  # Exemplo de assinatura para arquivos PDF
     b'\x89PNG\r': 'PNG',
-    b'PK\x03\x04': 'ZIP',
-    b'\xFF\xFB': 'MP3',
-    b'{\n': 'JSON',
-    b'IRPF ': 'IRPF',
-    b'<?xml': 'XML',
-    b'<!DOC': 'HTML',
-    b'MZ\x90\x00\x03': 'EXE/DLL',
+    b'\xa7\r\r\n\x00':'PyCharm',
     b'{\\rtf': 'RTF',
     b'\x00\x01\x00\x00\x00': 'TTF',
-    b'GIF89': 'GIF',
-    b'\xff\xd8\xff\xe0\x00': 'JPEG',
-    b"7z\xbc\xaf'":'7zip',
-    b'\xa7\r\r\n\x00':'PyCharm',
-    b'\x00\x00\x00\x00\x00':'ISO'
+    b'<?xml': 'XML',
+    b'PK\x03\x04': 'ZIP'
 # Adicione outras assinaturas conforme necessário
 }
 
